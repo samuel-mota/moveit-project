@@ -23,7 +23,7 @@ interface CountdownProviderProps {
 
 export const CountdownContext = createContext({} as CountdownContextData);
 
-const fixedMinutes = 0.05;
+const fixedMinutes = 25;
 let countdownTimeout: NodeJS.Timeout; // after clicking on the button "Abandonar ciclo" it still run 1 second more, to avoid that use it.
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
