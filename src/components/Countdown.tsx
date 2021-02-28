@@ -30,8 +30,13 @@ export function Countdown() {
       </div>
 
       {hasFinished ? (
-        <button disabled className={styles.countdownButton}>
+        <button
+          disabled
+          className={`${styles.countdownButton} ${styles.countdownButtonBar}`}
+        >
           Ciclo encerrado
+          <img src="/icons/checked.svg" className={styles.greenIcon} />
+          <span></span>
         </button>
       ) : (
         <>
@@ -42,6 +47,7 @@ export function Countdown() {
               onClick={resetCountdown}
             >
               Abandonar ciclo
+              <img src="/icons/x-mark.svg" className={styles.redIcon} />
             </button>
           ) : (
             <button
@@ -50,6 +56,7 @@ export function Countdown() {
               onClick={startCountdown}
             >
               Iniciar ciclo
+              <img src="/icons/play-button.svg" />
             </button>
           )}
         </>

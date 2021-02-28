@@ -1,5 +1,5 @@
 :root {
-  --white: #fff;
+  --primary: #fff;
   --background: #f2f3f5;
   --gray-line: #dcdde0;
   --text: #666666;
@@ -10,6 +10,11 @@
   --blue: #5965e0;
   --blue-dark: #4953b8;
   --blue-twitter: #2aa9e0;
+
+  --white: #fff;
+  --black: #000;
+  --white-hover: #cccccc;
+  --black-hover: #333333;
 }
 
 @media (max-width: 1080px) {
@@ -19,7 +24,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 660px) {
   html {
     /* 16px * 0.875 = 14px */
     font-size: 87.5%;
@@ -53,5 +58,29 @@ a {
   text-decoration: none;
 }
 
+/* DARK THEME */
+.darkTheme {
+  --primary: #2e384d;
+  --background: #1e2122;
+  --gray-line: #585858;
+  --text: #dcdde0;
+  --text-highlight: #b3b9ff;
+  --title: #bebebe;
+}
 
 
+div.dark-theme-button.react-toggle--checked .react-toggle-track {
+  background-color: var(--black-hover);
+}
+
+div.dark-theme-button.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: var(--black);
+}
+
+.dark-theme-button.react-toggle .react-toggle-track {
+  background-color: var(--white-hover);
+}
+
+.dark-theme-button.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: var(--white);
+}

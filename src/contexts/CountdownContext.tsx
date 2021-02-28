@@ -3,10 +3,10 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useState,
+  useState
 } from "react";
-
 import { ChallengesContext } from "./ChallengesContext";
+
 
 interface CountdownContextData {
   minutes: number;
@@ -23,7 +23,7 @@ interface CountdownProviderProps {
 
 export const CountdownContext = createContext({} as CountdownContextData);
 
-const fixedMinutes = 25;
+const fixedMinutes = .10;
 let countdownTimeout: NodeJS.Timeout; // after clicking on the button "Abandonar ciclo" it still run 1 second more, to avoid that use it.
 
 export function CountdownProvider({ children }: CountdownProviderProps) {

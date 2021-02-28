@@ -1,8 +1,13 @@
 // este arquivo document carrega uma única vez
 
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 
 export default class MyDocument extends Document {
+  componentDidMount() {
+    const body = document.getElementsByTagName("body")[0];
+    body.classList.add("darkMode" || "");
+  }
+
   render() {
     return (
       <Html>

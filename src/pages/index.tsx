@@ -1,52 +1,57 @@
-import Head from "next/head";
 import { GetServerSideProps } from "next";
-
+import Head from "next/head";
+import { ChallengeBox } from "../components/ChallengeBox";
 import { CompletedChallenges } from "../components/CompletedChallenges";
 import { Countdown } from "../components/Countdown";
+import { DarkModeButton } from "../components/DarkModeButton";
 import { ExperienceBar } from "../components/ExperienceBar";
 import { Profile } from "../components/Profile";
-import { ChallengeBox } from "../components/ChallengeBox";
-
-import styles from "../styles/pages/Home.module.css";
-import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
+import { CountdownProvider } from "../contexts/CountdownContext";
+import { DarkThemeProvider } from "../contexts/DarkThemeContext";
+import styles from "../styles/pages/Home.module.css";
 
 interface HomeProps {
   level: number;
   currentExperience: number;
   challengesCompleted: number;
+  darkTheme: boolean;
 }
 
 export default function Home(props: HomeProps) {
   // console.log(props);
 
   return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.container}>
+    <DarkThemeProvider darkTheme={props.darkTheme}>
+      <ChallengesProvider
+        level={props.level}
+        currentExperience={props.currentExperience}
+        challengesCompleted={props.challengesCompleted}
+      >
         <Head>
           <title>Inicio | move.it</title>
         </Head>
+        <div className={styles.container}>
+          <ExperienceBar />
 
-        <ExperienceBar />
-
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallengesProvider>
+          <CountdownProvider>
+            <section>
+              <div>
+                <Profile>
+                  <DarkModeButton />
+                </Profile>
+                
+                <CompletedChallenges />
+                <Countdown />
+              </div>
+              <div>
+                <ChallengeBox />
+              </div>
+            </section>
+          </CountdownProvider>
+        </div>
+      </ChallengesProvider>
+    </DarkThemeProvider>
   );
 }
 
@@ -59,7 +64,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //   challengesCompleted: 2,
   // };
 
-  const { level, currentExperience, challengesCompleted } = context.req.cookies;
+  const {
+    level,
+    currentExperience,
+    challengesCompleted,
+    darkTheme,
+  } = context.req.cookies;
 
   // console.log(user);
 
@@ -69,6 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       level: Number(level), // same as -> level: +level;
       currentExperience: Number(currentExperience),
       challengesCompleted: Number(challengesCompleted),
+      darkTheme: Boolean(darkTheme == "true"),
     },
   };
 };

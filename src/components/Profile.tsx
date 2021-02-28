@@ -1,8 +1,12 @@
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { ChallengesContext } from "../contexts/ChallengesContext";
 import styles from "../styles/components/Profile.module.css";
 
-export function Profile() {
+interface ProfileProps {
+  children: ReactNode;
+}
+
+export function Profile({children}: ProfileProps) {
   const { level } = useContext(ChallengesContext);
 
   return (
@@ -15,6 +19,7 @@ export function Profile() {
           Level {level}
         </p>
       </div>
+      {children}
     </div>
   );
 }
