@@ -1,5 +1,5 @@
 # Moveit project
-![Video preview](https://drive.google.com/file/d/1OLkkUnoAs26a1fWVLuBJj8OTNV7Edx_K/preview)
+![Preview](https://i.ibb.co/mywwmZf/Inicio-move-it.gif)
 
 ## Tecnologias utilizadas
 - Next.JS
