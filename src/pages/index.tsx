@@ -1,85 +1,28 @@
-import { GetServerSideProps } from "next";
-import Head from "next/head";
-import { ChallengeBox } from "../components/ChallengeBox";
-import { CompletedChallenges } from "../components/CompletedChallenges";
-import { Countdown } from "../components/Countdown";
-import { DarkModeButton } from "../components/DarkModeButton";
-import { ExperienceBar } from "../components/ExperienceBar";
-import { Profile } from "../components/Profile";
-import { ChallengesProvider } from "../contexts/ChallengesContext";
-import { CountdownProvider } from "../contexts/CountdownContext";
-import { DarkThemeProvider } from "../contexts/DarkThemeContext";
-import styles from "../styles/pages/Home.module.css";
+import Link from "next/link";
 
-interface HomeProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-  darkTheme: boolean;
-}
+import styles from "../styles/pages/Login.module.css";
 
-export default function Home(props: HomeProps) {
-  // console.log(props);
-
+export default function Login() {
   return (
-    <DarkThemeProvider darkTheme={props.darkTheme}>
-      <ChallengesProvider
-        level={props.level}
-        currentExperience={props.currentExperience}
-        challengesCompleted={props.challengesCompleted}
-      >
-        <Head>
-          <title>Inicio | move.it</title>
-        </Head>
-        <div className={styles.container}>
-          <ExperienceBar />
+    <div>
+      <img src="/images/Logo-M.svg" alt="Logo M de Move.it" />
+      <section>
+        <img src="/images/Logo.svg" alt="Logotipo Move.it" />
 
-          <CountdownProvider>
-            <section>
-              <div>
-                <Profile>
-                  <DarkModeButton />
-                </Profile>
-                
-                <CompletedChallenges />
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox />
-              </div>
-            </section>
-          </CountdownProvider>
-        </div>
-      </ChallengesProvider>
-    </DarkThemeProvider>
+        <form action="">
+          <label htmlFor="userprofile">Usuario github</label>
+          <input
+            type="text"
+            placeholder="escreva seu usuario do github"
+            name="userprofile"
+            required
+          />
+
+          <Link href="Home">
+            <button type="submit">Home</button>
+          </Link>
+        </form>
+      </section>
+    </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  // chamada api antes do browser construir o html/css/js
-  // é executado no server
-  // const user = {
-  //   level: 1,
-  //   currentExperience: 50,
-  //   challengesCompleted: 2,
-  // };
-
-  const {
-    level,
-    currentExperience,
-    challengesCompleted,
-    darkTheme,
-  } = context.req.cookies;
-
-  // console.log(user);
-
-  return {
-    // props: user,
-    props: {
-      level: Number(level), // same as -> level: +level;
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted),
-      darkTheme: Boolean(darkTheme == "true"),
-    },
-  };
-};
